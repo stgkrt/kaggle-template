@@ -1,12 +1,11 @@
 {
     "name":"kaggle-deps",
-    "dockerFile": "Dockerfile",
+    "dockerFile": "Dockerfile",  
+    "workspaceMount": "source=${localWorkspaceFolder},target=/kaggle,type=bind",
+    "workspaceFolder": "/kaggle",
     "runArgs": [
-        "--gpus all",
-        "-p 8888:8888",
-        "-p 10022:22",
-        "--shm-size=48gb",
-        "-w /kaggle"
+        "--gpus", "all",
+        "--shm-size", "48gb"
     ],
     "customizations": {
     "vscode": {
@@ -23,13 +22,11 @@
           }
         },
         "terminal.integrated.defaultProfile.linux": "bash",
-        "python.venvPath": "${workspaceFolder}/.venv",
         "python.formatting.provider": "none",
         "python.linting.enabled": true,
         "python.linting.flake8Enabled": true,
         "python.linting.flake8Args": ["--max-line-length", "88"],
         "python.linting.mypyEnabled": true,
-        "python.linting.ignorePatterns": [".venv/**/*.py"],
         "isort.args": ["--profile", "black"],
         "python.testing.unittestEnabled": false,
         "python.testing.pytestEnabled": true,
@@ -42,19 +39,21 @@
             "source.organizeImports": true
           }
         }
+	    }
     },
     "extensions": [
-		"ms-python.python",
-		"ms-python.vscode-pylance",
-		"ms-python.black-formatter",
-		"ms-python.flake8",
-		"ms-python.isort",
-		"ms-python.mypy-type-checker",
-		"esbenp.prettier-vscode",
-		"yzhang.markdown-all-in-one",
-		"tamasfe.even-better-toml",
-		"redhat.vscode-yaml",
-		"njpwerner.autodocstring",
-		"vscodevim.vim"
-	]
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.black-formatter",
+      "ms-python.flake8",
+      "ms-python.isort",
+      "ms-python.mypy-type-checker",
+      "esbenp.prettier-vscode",
+      "yzhang.markdown-all-in-one",
+      "tamasfe.even-better-toml",
+      "redhat.vscode-yaml",
+      "njpwerner.autodocstring",
+      "vscodevim.vim"
+    ]
+  }
 }
