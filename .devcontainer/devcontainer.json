@@ -53,7 +53,7 @@
       "tamasfe.even-better-toml",
       "redhat.vscode-yaml",
       "njpwerner.autodocstring",
-      "vscodevim.vim"
+      // "vscodevim.vim"
     ]
   }
 }
