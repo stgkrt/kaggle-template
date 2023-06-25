@@ -19,13 +19,14 @@
           },
           "fish": {
             "path": "fish"
-          }
+          },
         },
+        "extensions.verifySignature": false,
         "terminal.integrated.defaultProfile.linux": "bash",
         "python.formatting.provider": "none",
         "python.linting.enabled": true,
         "python.linting.flake8Enabled": true,
-        "python.linting.flake8Args": ["--max-line-length", "88"],
+        "python.linting.flake8Args": ["--max-line-length", "120"],
         "python.linting.mypyEnabled": true,
         "isort.args": ["--profile", "black"],
         "python.testing.unittestEnabled": false,
@@ -53,7 +54,7 @@
       "tamasfe.even-better-toml",
       "redhat.vscode-yaml",
       "njpwerner.autodocstring",
-      // "vscodevim.vim"
+      "vscodevim.vim"
     ]
   }
 }
