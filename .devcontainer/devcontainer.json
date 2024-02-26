@@ -24,17 +24,16 @@
                 "ms-toolsai.jupyter"
             ],
             "settings": {
-                "python.formatting.provider": "black",
-                "python.formatting.blackArgs": ["--config=${workspacefolder}/setup.cfg"],
-                "python.linting.mypyArgs": ["--config=${workspacefolder}/setup.cfg"],
-                "python.linting.flake8Args": ["--config=${workspacefolder}/setup.cfg"],
-                "mypy-type-checker.args": ["--config-file=${workspacefolder}/setup.cfg"],
                 "[python]" : {
                     "editor.formatOnSave": true,
                     "editor.codeActionsOnSave": {
                         "source.organizeImports": true
                     }
-                }
+                },
+                "python.formatting.provider": "black",
+                "python.formatting.blackArgs": ["--config=${workspacefolder}/setup.cfg"],
+                "python.linting.mypyArgs": ["--config=${workspacefolder}/setup.cfg"],
+                "python.linting.flake8Args": ["--config=${workspacefolder}/setup.cfg"]
             }
         }
     },
