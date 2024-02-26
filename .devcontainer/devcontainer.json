@@ -44,6 +44,6 @@
             }
         }
     },
-    "postAttachCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && sh script/setup_dev.sh"
+    "postAttachCommand": "git config --global --add safe.directory /kaggle",
+    "postCreateCommand": "git config --global --add safe.directory /kaggle && sh script/setup_dev.sh"
 }
