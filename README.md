@@ -1,13 +1,20 @@
 # my kaggle template
 ぼくの かんがえた さいきょうの かぐるかんきょう
 
+devcontainerでコンテナビルドが終わったときにscripts/setup_dev.shが実行されるようにしています。
+(precommitが入るようになっています)
+pipのresolverでerrorが出ますがprecommitは動くのでとりあえずそのままで。
+
 # directory
-    ├── input/              <- Competition Datasets.  
-    ├── notebooks/          <- Jupyter notebooks.  
-    ├── scripts/            <- Scripts.  
-    ├── src/                <- Source code. This sould be Python module.  
-    ├── working/            <- Output models and train logs.  
-    │  
-    ├── .dockerignore  
-    ├── .gitignore  
-    └── README.md           <- The top-level README for developers.  
+    ├── .devcontainer            <- Container settings.
+    ├── input/                   <- Competition Datasets.
+    ├── notebooks/               <- Jupyter notebooks.
+    ├── scripts/                 <- Scripts.
+    ├── src/                     <- Source code. This sould be Python module.
+    ├── working/                 <- Output models and train logs.
+    │
+    ├── .dockerignore
+    ├── .gitignore
+    ├── .pre-commit-config.yaml  <- pre-commit settings.
+    ├── setup.cfg                <- formatter/linter settings in vscode.
+    └── README.md                <- The top-level README for developers.
