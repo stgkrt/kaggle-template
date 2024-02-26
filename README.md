@@ -3,6 +3,7 @@
 
 devcontainerでコンテナビルドが終わったときにscripts/setup_dev.shが実行されるようにしています。
 (precommitが入るようになっています)
+sshから接続した状態でgit cloneから始めると、dotfilesがないとエラーが出ますがリビルドすれば正常に使用できます。
 pipのresolverでerrorが出ますがprecommitは動くのでとりあえずそのままで。
 
 # directory
