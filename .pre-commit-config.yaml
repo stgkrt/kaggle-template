@@ -27,4 +27,8 @@ repos:
   rev: v1.5.1
   hooks:
     - id: mypy
-      args: [--ignore-missing-imports, --show-column-numbers, --disallow-untyped-defs=false]
+      args:
+       - "--ignore-missing-imports"
+       - "--show-column-numbers"
+       - "--allow-untyped-defs"
+       - "--allow-redefinition"

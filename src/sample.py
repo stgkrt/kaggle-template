@@ -1,0 +1,17 @@
+# blackがちゃんと動いているか確認するためのサンプルコード
+# 1行で書いても88行以内に収まるように整形される
+def tooooooooooooooooo_long_function_name(
+    toooooooooooooooo_long_arg1, toooooooooooooooooooooooooo_long_arg2
+):
+    pass
+
+
+# mypyの型チェックが入るか確認するためのサンプルコード
+# function is missing a type annotationみたいなエラーが出る
+def add_numbers(a, b):
+    return a + b
+
+
+# こっちは型チェックが通るはず
+def sub_numbers(a: int, b: int) -> int:
+    return a - b
