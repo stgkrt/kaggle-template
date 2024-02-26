@@ -1,11 +1,13 @@
 {
-    "name":"kaggle-deps",
+    "name": "kaggle-deps",
     "dockerFile": "Dockerfile",
     "workspaceMount": "source=${localWorkspaceFolder},target=/kaggle,type=bind",
     "workspaceFolder": "/kaggle",
     "runArgs": [
-        "--gpus", "all",
-        "--shm-size", "60gb"
+        "--gpus",
+        "all",
+        "--shm-size",
+        "60gb"
     ],
     "customizations": {
         "vscode": {
@@ -24,16 +26,22 @@
                 "ms-toolsai.jupyter"
             ],
             "settings": {
-                "[python]" : {
+                "[python]": {
                     "editor.formatOnSave": true,
                     "editor.codeActionsOnSave": {
                         "source.organizeImports": true
                     }
                 },
                 "python.formatting.provider": "black",
-                "python.formatting.blackArgs": ["--config=${workspacefolder}/setup.cfg"],
-                "python.linting.mypyArgs": ["--config=${workspacefolder}/setup.cfg"],
-                "python.linting.flake8Args": ["--config=${workspacefolder}/setup.cfg"]
+                "python.formatting.blackArgs": [
+                    "--config=${workspacefolder}/pyproject.toml"
+                ],
+                "python.linting.mypyArgs": [
+                    "--config=${workspacefolder}/mypy.ini"
+                ],
+                "python.linting.flake8Args": [
+                    "--config=${workspacefolder}/.flake8"
+                ]
             }
         }
     },
