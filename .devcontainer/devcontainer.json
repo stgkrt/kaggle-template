@@ -8,20 +8,37 @@
         "--shm-size", "60gb"
     ],
     "customizations": {
-      "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "ms-python.black-formatter",
-        "ms-python.flake8",
-        "ms-python.isort",
-        "ms-python.mypy-type-checker",
-        "esbenp.prettier-vscode",
-        "yzhang.markdown-all-in-one",
-        "tamasfe.even-better-toml",
-        "redhat.vscode-yaml",
-        "njpwerner.autodocstring",
-        "vscodevim.vim"
-      ]
-  },
-  "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} & sh script/setup_dev.sh"
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.black-formatter",
+                "ms-python.flake8",
+                "ms-python.isort",
+                "ms-python.mypy-type-checker",
+                "esbenp.prettier-vscode",
+                "yzhang.markdown-all-in-one",
+                "tamasfe.even-better-toml",
+                "redhat.vscode-yaml",
+                "njpwerner.autodocstring",
+                "vscodevim.vim",
+                "ms-toolsai.jupyter"
+            ],
+            "settings": {
+                "python.formatting.provider": "black",
+                "python.formatting.blackArgs": ["--config=${workspacefolder}/setup.cfg"],
+                "python.linting.mypyArgs": ["--config=${workspacefolder}/setup.cfg"],
+                "python.linting.flake8Args": ["--config=${workspacefolder}/setup.cfg"],
+                "mypy-type-checker.args": ["--config-file=${workspacefolder}/setup.cfg"],
+                "[python]" : {
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": true
+                    }
+                }
+            }
+        }
+    },
+    "postAttachCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postCreateCommand": "sh script/setup_dev.sh"
 }
