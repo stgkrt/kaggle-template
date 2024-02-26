@@ -183,3 +183,7 @@ wandb
 *.jpg
 *.tiff
 *.npy
+
+input/
+outputs/
+working/
