@@ -45,5 +45,5 @@
         }
     },
     "postAttachCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-    "postCreateCommand": "sh script/setup_dev.sh"
+    "postCreateCommand": "sh script/setup_dev.sh && git config --global --add safe.directory ${containerWorkspaceFolder}"
 }
