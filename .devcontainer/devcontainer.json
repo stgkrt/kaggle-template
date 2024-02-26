@@ -22,7 +22,6 @@
                 "yzhang.markdown-all-in-one",
                 "tamasfe.even-better-toml",
                 "redhat.vscode-yaml",
-                "njpwerner.autodocstring",
                 "ms-toolsai.jupyter"
             ],
             "settings": {
