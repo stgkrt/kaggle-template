@@ -1,3 +1,7 @@
+# 使わないのにimportしているとエラーになる
+# import numpy as np
+
+
 # blackがちゃんと動いているか確認するためのサンプルコード
 # 1行で書いても88行以内に収まるように整形される
 def tooooooooooooooooo_long_function_name(
@@ -15,3 +19,14 @@ def add_numbers(a, b):
 # こっちは型チェックが通るはず
 def sub_numbers(a: int, b: int) -> int:
     return a - b
+
+
+# allow-redefinitionを設定しているので、再定義できる
+def convert_number_to_string(number: int) -> str:
+    number = str(number)
+    return number
+
+
+if __name__ == "__main__":
+    print(add_numbers(1, 2))
+    print(sub_numbers(1, 2))
