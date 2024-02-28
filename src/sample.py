@@ -1,7 +1,3 @@
-# 使わないのにimportしているとエラーになる
-# import numpy as np
-
-
 # blackがちゃんと動いているか確認するためのサンプルコード
 # 1行で書いても88行以内に収まるように整形される
 def tooooooooooooooooo_long_function_name(
@@ -30,6 +26,10 @@ def convert_number_to_string(number: int) -> str:
 
 def multiply_numbers(a: int, b: int) -> int:
     return a * b
+
+
+def divide_numbers(a: int, b: int) -> float:
+    return a / b
 
 
 if __name__ == "__main__":
