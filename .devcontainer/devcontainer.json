@@ -11,6 +11,18 @@
     ],
     "customizations": {
         "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.black-formatter",
+                "ms-python.flake8",
+                "ms-python.isort",
+                "ms-python.mypy-type-checker",
+                "yzhang.markdown-all-in-one",
+                "tamasfe.even-better-toml",
+                "redhat.vscode-yaml",
+                "ms-toolsai.jupyter"
+            ],
             "settings": {
                 "[python]": {
                     "editor.formatOnSave": true,
@@ -28,15 +40,7 @@
                 "python.linting.flake8Args": [
                     "--config=${workspacefolder}/.flake8"
                 ]
-            },
-            "extensions": [
-                "ms-python.black-formatter",
-                "ms-python.flake8",
-                "ms-python.isort",
-                "ms-python.mypy-type-checker",
-                "ms-toolsai.jupyter-renderers",
-                "ms-toolsai.vscode-jupyter-slideshow",
-            ]
+            }
         }
     },
     "postAttachCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
