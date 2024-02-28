@@ -7,6 +7,7 @@
 def tooooooooooooooooo_long_function_name(
     toooooooooooooooo_long_arg1, tooooooooooooo_long_arg2
 ):
+
     return None
 
 
@@ -27,6 +28,11 @@ def convert_number_to_string(number: int) -> str:
     return number
 
 
+def multiply_numbers(a: int, b: int) -> int:
+    return a * b
+
+
 if __name__ == "__main__":
     print(add_numbers(1, 2))
     print(sub_numbers(1, 2))
+    print(convert_number_to_string(123))
