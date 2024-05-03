@@ -1,4 +1,4 @@
-ARG CONTAIER_VER=140
+ARG CONTAIER_VER=147
 
 FROM gcr.io/kaggle-gpu-images/python:v${CONTAIER_VER}
 
