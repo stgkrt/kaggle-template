@@ -1,6 +1,8 @@
 # blackがちゃんと動いているか確認するためのサンプルコード
 # 1行で書いても88行以内に収まるように整形される
-def tooooooooooooooooo_long_function_name(toooooooooooooooo_long_arg1, tooooooooooooo_long_arg2):
+def tooooooooooooooooo_long_function_name(
+    toooooooooooooooo_long_arg1, tooooooooooooo_long_arg2
+):
     return None
 
 
