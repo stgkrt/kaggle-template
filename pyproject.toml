@@ -1,7 +1,6 @@
 [tool.ruff]
 line-length = 88
 ignore = ["E402"]
-line-length = 88
 select = [
     "B",
     "E",
