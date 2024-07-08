@@ -14,14 +14,12 @@
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",
-                "ms-python.black-formatter",
-                "ms-python.flake8",
-                "ms-python.isort",
                 "ms-python.mypy-type-checker",
                 "yzhang.markdown-all-in-one",
                 "tamasfe.even-better-toml",
                 "redhat.vscode-yaml",
-                "ms-toolsai.jupyter"
+                "ms-toolsai.jupyter",
+                "charliermarsh.ruff"
             ],
             "settings": {
                 "[python]": {
@@ -30,16 +28,7 @@
                         "source.organizeImports": true
                     }
                 },
-                "python.formatting.provider": "black",
-                "python.formatting.blackArgs": [
-                    "--config=${workspacefolder}/pyproject.toml"
-                ],
-                "python.linting.mypyArgs": [
-                    "--config=${workspacefolder}/mypy.ini"
-                ],
-                "python.linting.flake8Args": [
-                    "--config=${workspacefolder}/.flake8"
-                ]
+                "python.formatting.provider": "charliermarsh.ruff"
             }
         }
     },
