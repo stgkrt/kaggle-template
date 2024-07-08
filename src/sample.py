@@ -3,7 +3,6 @@
 def tooooooooooooooooo_long_function_name(
     toooooooooooooooo_long_arg1, tooooooooooooo_long_arg2
 ):
-
     return None
 
 
