@@ -22,6 +22,8 @@
                 "charliermarsh.ruff"
             ],
             "settings": {
+                "editor.formatOnSave": true,
+                "notebook.formatOnSave.enabled":true,
                 "[python]": {
                     "editor.formatOnSave": true,
                     "editor.codeActionsOnSave": {
