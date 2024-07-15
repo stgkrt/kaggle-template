@@ -1,6 +1,6 @@
 [tool.ruff]
 line-length = 88
-ignore = ["E402"]
+ignore = ["E402", "F401"]
 select = [
     "B",
     "E",

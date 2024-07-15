@@ -1,0 +1,7 @@
+name: basic_model
+params:
+  backbone_name: "tf_efficientnet_b0_ns"
+  in_channels: 3
+  out_channels: 3
+  use_batchnorm: true
+  dropout: 0.0

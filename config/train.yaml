@@ -1,0 +1,36 @@
+# @package _global_
+# overriding hydra default config
+hydra:
+  job:
+    name: train
+  run:
+    dir: ${dir.output_dir}/${exp_name}
+
+defaults:
+  - _self_
+  - model: basic_model
+  - dataset: basic_dataset
+  - dir: basic_dir
+
+competition_name: mnist
+seed: 42
+exp_name: default
+
+trainer:
+  epochs: 10
+  accelerator: auto
+  use_amp: true
+  debug: false
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  monitor: val_loss
+  monitor_mode: min
+  check_val_every_n_epoch: 1
+
+
+# optimizer
+optimizer:
+  name: warmup_cosine
+  lr: 0.001
+  weight_decay: 0.01
+  num_warmup_steps: 2
