@@ -26,11 +26,3 @@ trainer:
   monitor: val_loss
   monitor_mode: min
   check_val_every_n_epoch: 1
-
-
-# optimizer
-optimizer:
-  name: warmup_cosine
-  lr: 0.001
-  weight_decay: 0.01
-  num_warmup_steps: 2

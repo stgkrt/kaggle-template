@@ -1,7 +1,34 @@
-name: basic_model
-params:
-  backbone_name: "tf_efficientnet_b0_ns"
-  in_channels: 3
-  out_channels: 3
-  use_batchnorm: true
-  dropout: 0.0
+_target_: src.model.model_module.ModelModule
+
+model_architectures:
+  _target_: src.model.architectures.model_architectures.ModelArchitectures
+  model_config:
+    model_name: basic_model
+    backbone_name: "tf_efficientnet_b0_ns"
+    pretrained: true
+    in_channels: 3
+    out_channels: 3
+    use_batchnorm: true
+    dropout: 0.0
+
+loss:
+  _target_: src.model.losses.LossModule
+  loss_config:
+    loss_name: BCEWithLogitsLoss
+    pos_weight: null
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.001
+  weight_decay: 0.0
+  num_warmup_steps: 2
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.CosineAnnealingWarmRestarts
+  _partial_: true
+  mode: min
+  factor: 0.1
+  patience: 10
+
+compile: true
