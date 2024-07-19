@@ -40,6 +40,7 @@ class LossConfig:
 
 @dataclass
 class ModelConfig:
+    _target_: str
     model_name: str
     backbone_name: str
     pretrained: bool

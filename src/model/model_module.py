@@ -1,11 +1,8 @@
-import os
-import sys
 from typing import Any
 
 import pytorch_lightning as L
 import torch
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 from src.model.architectures.model_architectures import ModelArchitectures
 from src.model.losses import LossModule
 
@@ -79,3 +76,8 @@ class ModelModule(L.LightningModule):
                 },
             }
         return {"optimizer": optimizer}
+
+    def save_state_dict(self, path: str) -> None:
+        torch.save(self.model.state_dict(), path)
+        print(f"Model weights saved to {path}")
+        return

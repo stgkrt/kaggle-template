@@ -1,15 +1,7 @@
-import os
-import sys
-
 import timm
 import torch.nn as nn
 
-model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)
-src_dir = os.path.join(model_dir, os.pardir)
-sys.path.append(model_dir)
-sys.path.append(src_dir)
-
-from configs import ModelConfig
+from src.configs import ModelConfig
 
 
 class BasicModel(nn.Module):
@@ -36,6 +28,9 @@ if __name__ == "__main__":
         out_channels=1,
         use_batchnorm=True,
         dropout=0.5,
+        loss_config=None,  # type: ignore
+        optimizer=None,  # type: ignore
+        scheduler=None,  # type: ignore
     )
     model = BasicModel(config)
     print(model)

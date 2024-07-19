@@ -9,3 +9,4 @@ RUN pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url h
 RUN pip install hydra-core segmentation-models-pytorch
 
 WORKDIR /kaggle
+RUN export PYTHONPATH=$PYTHONPATH:/kaggle/src

@@ -1,11 +1,6 @@
-import os
-import sys
-
 import torch
-from torch import nn
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 from configs import LossConfig
+from torch import nn
 
 
 class DiceLoss(nn.Module):
