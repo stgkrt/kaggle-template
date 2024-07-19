@@ -2,20 +2,22 @@ from dataclasses import dataclass
 
 
 @dataclass
-class DatasetConfig:
-    name: str
-    image_size: int
-    num_workers: int
-    batch_size: int
-    shuffle: bool
-    pin_memory: bool
-
-
-@dataclass
 class DirConfig:
     data_dir: str
     processed_dir: str
     output_dir: str
+
+
+@dataclass
+class DatasetConfig:
+    _target_: str
+    data_dir: str
+    train_num: int
+    valid_num: int
+    test_num: int
+    batch_size: int
+    num_workers: int
+    pin_memory: bool
 
 
 @dataclass
@@ -54,12 +56,6 @@ class ModelConfig:
 
 
 @dataclass
-class SplitConfig:
-    train_study_ids: list[str]
-    valid_study_ids: list[str]
-
-
-@dataclass
 class TrainerConfig:
     epochs: int
     accelerator: str
@@ -75,11 +71,9 @@ class TrainerConfig:
 @dataclass
 class TrainConfig:
     exp_name: str
-    num_epochs: int
     seed: int
+    ckpt_path: str
     dir: DirConfig
-    split: SplitConfig
     model: ModelConfig
-    loss: LossConfig
     dataset: DatasetConfig
-    optimizer: OptimizerConfig
+    trainer: TrainerConfig

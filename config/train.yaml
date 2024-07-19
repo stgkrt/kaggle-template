@@ -8,6 +8,7 @@ hydra:
 
 defaults:
   - _self_
+  - trainer: basic_trainer
   - model: basic_model
   - dataset: basic_dataset
   - dir: basic_dir
@@ -15,14 +16,4 @@ defaults:
 competition_name: mnist
 seed: 42
 exp_name: default
-
-trainer:
-  epochs: 10
-  accelerator: auto
-  use_amp: true
-  debug: false
-  gradient_clip_val: 1.0
-  accumulate_grad_batches: 1
-  monitor: val_loss
-  monitor_mode: min
-  check_val_every_n_epoch: 1
+ckpt_path: null
