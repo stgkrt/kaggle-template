@@ -2,4 +2,5 @@
 exp_name: debug
 
 trainer:
-  epochs: 2
+  min_epochs: 1
+  max_epochs: 2
