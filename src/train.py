@@ -3,7 +3,9 @@ from typing import Any
 import hydra
 import pytorch_lightning as L
 from omegaconf import DictConfig, OmegaConf
+from pytorch_lightning.callbacks import Callback
 
+from src.log_utils.instantiators import instantiate_callbacks
 from src.log_utils.pylogger import RankedLogger
 from src.log_utils.tasks import extras, task_wrapper
 from src.model.model_module import ModelModule
@@ -27,10 +29,17 @@ def run_train(config: DictConfig) -> tuple[dict[str, Any], dict[str, Any]]:
 
     log.info(f"Instantiating model: {config.model._target_}")
     model: ModelModule = hydra.utils.instantiate(config.model)
+
     log.info(f"Instantiating data module: {config.dataset._target_}")
     datamodule = hydra.utils.instantiate(config.dataset)
+
+    log.info(f"Instantiating callbacks: {config.callbacks}")
+    callbacks: list[Callback] = instantiate_callbacks(config.callbacks)
+
     log.info("Instantiating trainer")
-    trainer: L.Trainer = hydra.utils.instantiate(config.trainer, logger=False)
+    trainer: L.Trainer = hydra.utils.instantiate(
+        config.trainer, callbacks=callbacks, logger=False
+    )
     log.info("Starting training")
     trainer.fit(model=model, datamodule=datamodule)
     train_metrics = trainer.callback_metrics

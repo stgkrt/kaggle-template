@@ -56,6 +56,56 @@ class ModelConfig:
 
 
 @dataclass
+class EarlyStoppingConfig:
+    _target_: str
+    monitor: str
+    min_delta: float
+    patience: int
+    mode: str
+    strict: bool
+    check_finite: bool
+    stopping_threshold: float
+    divergence_threshold: float
+    check_on_train_epoch_end: bool
+
+
+@dataclass
+class ModelcheckpointConfig:
+    _target_: str
+    dirpath: str
+    filename: str
+    monitor: str
+    verbose: bool
+    save_last: bool
+    save_top_k: int
+    mode: str
+    auto_insert_metric_name: bool
+    every_n_val_epochs: int
+    train_time_interval: int
+    every_n_epochs: int
+    save_on_train_epoch_end: bool
+
+
+@dataclass
+class ModelSummaryConfig:
+    _target_: str
+    max_depth: int
+
+
+@dataclass
+class RichProgressbar:
+    _target_: str
+
+
+@dataclass
+class Callbacks:
+    early_stopping: EarlyStoppingConfig
+    modelcheckpoint: ModelcheckpointConfig
+    model_summary: ModelSummaryConfig
+    rich_progressbar: RichProgressbar
+
+
+@dataclass
 class TrainerConfig:
     epochs: int
     accelerator: str
@@ -77,3 +127,4 @@ class TrainConfig:
     model: ModelConfig
     dataset: DatasetConfig
     trainer: TrainerConfig
+    callbacks: Callbacks
