@@ -4,7 +4,7 @@ hydra:
   job:
     name: train
   run:
-    dir: ${dir.output_dir}/${exp_name}
+    dir: ${dir.output_dir}
 
 defaults:
   - _self_
@@ -13,8 +13,11 @@ defaults:
   - dataset: basic_dataset
   - dir: basic_dir
   - callbacks: default
+  - logger: wandb
 
 competition_name: mnist
 seed: 42
+group: default
 exp_name: default
+tag: ["default"]
 ckpt_path: null

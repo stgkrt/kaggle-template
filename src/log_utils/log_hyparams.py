@@ -42,13 +42,12 @@ def log_hyperparameters(object_dict: dict[str, Any]) -> None:
         p.numel() for p in model.parameters() if not p.requires_grad
     )
 
-    hparams["data"] = cfg["data"]  # type: ignore
+    hparams["dataset"] = cfg["dataset"]  # type: ignore
     hparams["trainer"] = cfg["trainer"]  # type: ignore
 
     hparams["callbacks"] = cfg.get("callbacks")  # type: ignore
     hparams["extras"] = cfg.get("extras")  # type: ignore
 
-    hparams["task_name"] = cfg.get("task_name")  # type: ignore
     hparams["tags"] = cfg.get("tags")  # type: ignore
     hparams["ckpt_path"] = cfg.get("ckpt_path")  # type: ignore
     hparams["seed"] = cfg.get("seed")  # type: ignore

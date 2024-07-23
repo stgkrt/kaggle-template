@@ -4,3 +4,5 @@ exp_name: debug
 trainer:
   min_epochs: 1
   max_epochs: 2
+
+logger: null

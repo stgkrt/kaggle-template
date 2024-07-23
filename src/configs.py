@@ -105,6 +105,10 @@ class Callbacks:
     rich_progressbar: RichProgressbar
 
 
+class LoggerConfig:
+    _target_: str
+
+
 @dataclass
 class TrainerConfig:
     epochs: int
@@ -128,3 +132,4 @@ class TrainConfig:
     dataset: DatasetConfig
     trainer: TrainerConfig
     callbacks: Callbacks
+    logger: LoggerConfig
