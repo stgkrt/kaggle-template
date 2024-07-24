@@ -4,6 +4,7 @@ import pytorch_lightning as L
 import torch
 from torchmetrics import MeanMetric
 
+from src.metrics.competition_metrics import CompetitionMetrics
 from src.model.architectures.model_architectures import ModelArchitectures
 from src.model.losses import LossModule
 
@@ -13,6 +14,7 @@ class ModelModule(L.LightningModule):
         self,
         model_architectures: ModelArchitectures,
         criterion: LossModule,
+        metrics: CompetitionMetrics,
         optimizer: torch.optim.Optimizer,
         scheduler: torch.optim.lr_scheduler,
         compile: bool,
@@ -20,12 +22,20 @@ class ModelModule(L.LightningModule):
         super().__init__()
         self.model = model_architectures
         self.criterion = criterion
+        self.metrics = metrics
         # this line allows to access init params with 'self.hparams' attribute
         # also ensures init params will be stored in ckpt
         self.save_hyperparameters(logger=False)
 
         self.train_loss = MeanMetric()
         self.valid_loss = MeanMetric()
+        # validの予測値と正解値を保存するための変数(device設定)
+        if torch.cuda.is_available():
+            self.accelarator = "cuda"
+        else:
+            self.accelarator = "cpu"
+        self.valid_preds = torch.Tensor().to(self.accelarator)
+        self.valid_targets = torch.Tensor().to(self.accelarator)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.model(x)
@@ -62,6 +72,8 @@ class ModelModule(L.LightningModule):
         self, batch: tuple[torch.Tensor, torch.Tensor], batch_idx: int
     ) -> torch.Tensor:
         loss, preds, targets = self.model_step(batch)
+        self.valid_preds = torch.cat((self.valid_preds, preds))
+        self.valid_targets = torch.cat((self.valid_targets, targets))
         self.valid_loss(loss)
         self.log(
             "val_loss",
@@ -71,6 +83,19 @@ class ModelModule(L.LightningModule):
             prog_bar=True,
         )
         return loss
+
+    # epochの終わりにmetricsのlogを出力
+    def on_train_epoch_end(self) -> None:
+        valid_targets = self.valid_targets.cpu()
+        valid_preds = self.valid_preds.cpu()
+        metrics = self.metrics(valid_targets, valid_preds)
+        self.log(
+            "competition_metrics", metrics, on_step=False, on_epoch=True, prog_bar=True
+        )
+
+        self.valid_preds = torch.Tensor().to(self.accelarator)
+        self.valid_targets = torch.Tensor().to(self.accelarator)
+        return super().on_train_epoch_end()
 
     def configure_optimizers(self) -> dict[str, Any]:  # type: ignore
         """Choose what optimizers and learning-rate schedulers

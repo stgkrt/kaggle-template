@@ -18,6 +18,9 @@ criterion:
     loss_name: BCEWithLogitsLoss
     pos_weight: null
 
+metrics:
+  _target_ :  src.metrics.competition_metrics.CompetitionMetrics
+
 optimizer:
   _target_: torch.optim.Adam
   _partial_: true
