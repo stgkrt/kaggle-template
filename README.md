@@ -8,7 +8,7 @@ devcontainerでコンテナビルドが終わったときにscripts/setup_dev.sh
 
 # directory
     ├── .devcontainer             <- Container settings.
-    ├── configs                   <- Hydra configs
+    ├── configs/                  <- Hydra configs
     ├── input/                    <- Competition Datasets.
     ├── notebooks/                <- Jupyter notebooks.
     ├── scripts/                  <- Scripts.
@@ -18,7 +18,8 @@ devcontainerでコンテナビルドが終わったときにscripts/setup_dev.sh
     ├── .dockerignore
     ├── .gitignore
     ├── .pre-commit-config.yaml   <- pre-commit settings.
-    ├── setup.cfg                 <- formatter/linter settings in vscode.
+    ├── pyproject.toml            <- project setting (only ruff setting).
+    ├── mypy.ini                  <- mypy setting.
     └── README.md                 <- The top-level README for developers.
 
 # how to run exp
