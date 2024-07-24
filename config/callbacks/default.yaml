@@ -6,7 +6,7 @@ defaults:
   - _self_
 
 model_checkpoint:
-  dirpath: ${dir.output_dir}/${exp_name}
+  dirpath: ${dir.output_dir}/ckpts
   filename: "epoch_{epoch:03d}"
   monitor: "val_loss"
   mode: "max"
@@ -14,7 +14,7 @@ model_checkpoint:
   auto_insert_metric_name: False
 
 early_stopping:
-  monitor: "val_loss"
+  monitor: "competition_metrics"
   patience: 100
   mode: "max"
 

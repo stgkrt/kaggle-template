@@ -18,6 +18,7 @@ defaults:
 competition_name: mnist
 seed: 42
 group: default
-exp_name: default
+# 間違って実験を上書きしたくないので実験名に日時を追加
+exp_name: default_${now:%Y%m%d_%H%M%S}
 tag: ["default"]
 ckpt_path: null

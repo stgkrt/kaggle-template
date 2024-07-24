@@ -105,6 +105,7 @@ class Callbacks:
     rich_progressbar: RichProgressbar
 
 
+@dataclass
 class LoggerConfig:
     _target_: str
 
