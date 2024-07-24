@@ -1,4 +1,3 @@
-# auc scoreを計算する関数
 import torch
 from torchmetrics.classification.accuracy import Accuracy
 
