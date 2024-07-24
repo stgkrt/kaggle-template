@@ -18,12 +18,12 @@ log = pylogger.RankedLogger(__name__, rank_zero_only=True)
 def print_config_tree(
     cfg: DictConfig,
     print_order: Sequence[str] = (
-        "data",
+        "dataset",
         "model",
         "callbacks",
         "logger",
         "trainer",
-        "paths",
+        "dir",
         "extras",
     ),
     resolve: bool = False,
@@ -73,7 +73,7 @@ def print_config_tree(
 
     # save config tree to file
     if save_to_file:
-        with open(Path(cfg.paths.output_dir, "config_tree.log"), "w") as file:
+        with open(Path(cfg.dir.output_dir, "config_tree.log"), "w") as file:
             rich.print(tree, file=file)
 
 
