@@ -6,8 +6,8 @@ wandb:
   id: null # pass correct id to resume experiment!
   anonymous: null # enable anonymous logging
   project: "${competition_name}"
-  group: "${group}"
-  name: "${exp_name}"
+  group: "${exp_name}"
+  name: "${fold}"
   log_model: False # upload lightning ckpts
   prefix: "" # a string to put at the beginning of metric keys
   # entity: "" # set to name of your wandb team

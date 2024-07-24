@@ -101,13 +101,13 @@ class ModelModule(L.LightningModule):
         self.log(
             "competition_metrics", metrics, on_step=False, on_epoch=True, prog_bar=True
         )
-        self.save_best_oof(metrics)
+        self.save_best(metrics)
         # preds/targetsの初期化
         self.valid_preds = torch.Tensor().to(self.accelarator)
         self.valid_targets = torch.Tensor().to(self.accelarator)
         return super().on_train_epoch_end()
 
-    def save_best_oof(self, metrics: float) -> None:
+    def save_best(self, metrics: float) -> None:
         if metrics > self.best_metrics:
             self.best_metrics = metrics
             # oofの保存
@@ -118,6 +118,9 @@ class ModelModule(L.LightningModule):
                 }
             )
             oof.write_csv(os.path.join(self.oof_dir, "oof.csv"))
+            # load best weights
+            weights_path = os.path.join(self.oof_dir, "best_weights.pth")
+            torch.save(self.model.model.state_dict(), weights_path)
 
     def configure_optimizers(self) -> dict[str, Any]:  # type: ignore
         """Choose what optimizers and learning-rate schedulers

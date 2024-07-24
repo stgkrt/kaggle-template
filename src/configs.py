@@ -15,15 +15,23 @@ class AugConfig:
 
 
 @dataclass
-class DatasetConfig:
-    _target_: str
-    data_dir: str
+class SplitConfig:
     train_num: int
     valid_num: int
     test_num: int
+
+
+@dataclass
+class DatasetConfig:
+    _target_: str
+    data_dir: str
+    # train_num: int
+    # valid_num: int
+    # test_num: int
     batch_size: int
     num_workers: int
     pin_memory: bool
+    splits: SplitConfig
     train_transforms: list[AugConfig] | None
     valid_transforms: list[AugConfig] | None
 

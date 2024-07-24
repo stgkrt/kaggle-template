@@ -1,11 +1,9 @@
 _target_: src.data.data_module.DataModule
 data_dir: /kaggle/input
-train_num: 55000
-valid_num: 5000
-test_num: 10000
 batch_size: 32
 num_workers: 2
 pin_memory: true
+splits: ${splits}
 train_transforms:
   _target_: src.data.augmentations.Augmentations
   config:

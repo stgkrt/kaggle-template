@@ -4,6 +4,7 @@ from torch.utils.data import ConcatDataset, DataLoader, Dataset, random_split
 from torchvision.datasets import MNIST
 from torchvision.transforms import transforms
 
+from src.configs import SplitConfig
 from src.data.augmentations import Augmentations
 
 
@@ -17,12 +18,10 @@ class DataModule(LightningDataModule):
     def __init__(
         self,
         data_dir: str = "/kaggle/input",
-        train_num: int = 55000,
-        valid_num: int = 5000,
-        test_num: int = 10000,
         batch_size: int = 64,
         num_workers: int = 0,
         pin_memory: bool = True,
+        splits: SplitConfig | None = None,
         train_transforms: Augmentations | None = None,
         valid_transforms: Augmentations | None = None,
     ) -> None:
@@ -48,8 +47,11 @@ class DataModule(LightningDataModule):
         self.data_test: Dataset | None = None
         # from config
         self.data_dir = data_dir
-        split = (train_num, valid_num, test_num)
-        self.train_val_test_split = split
+        if splits is None:
+            train_val_test_split = (55000, 5000, 10000)
+        else:
+            train_val_test_split = (splits.train_num, splits.valid_num, splits.test_num)
+        self.train_val_test_split = train_val_test_split
         self.batch_size = batch_size
         self.batch_size_per_device = batch_size
         self.num_workers = num_workers
@@ -141,26 +143,23 @@ class DataModule(LightningDataModule):
 if __name__ == "__main__":
     from src.configs import DatasetConfig
 
+    splits = SplitConfig(train_num=55000, valid_num=5000, test_num=10000)
     config = DatasetConfig(
         _target_="src.data.data_module.DataModule",
         data_dir="/kaggle/input",
-        train_num=55000,
-        valid_num=5000,
-        test_num=10000,
         num_workers=0,
         batch_size=64,
         pin_memory=False,
+        splits=splits,
         train_transforms=None,
         valid_transforms=None,
     )
     data_module = DataModule(
         data_dir=config.data_dir,
-        train_num=config.train_num,
-        valid_num=config.valid_num,
-        test_num=config.test_num,
         num_workers=config.num_workers,
         batch_size=config.batch_size,
         pin_memory=config.pin_memory,
+        splits=config.splits,
         train_transforms=None,
         valid_transforms=None,
     )
