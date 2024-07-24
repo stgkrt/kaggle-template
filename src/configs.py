@@ -9,6 +9,12 @@ class DirConfig:
 
 
 @dataclass
+class AugConfig:
+    _target_: str
+    p: float
+
+
+@dataclass
 class DatasetConfig:
     _target_: str
     data_dir: str
@@ -18,6 +24,8 @@ class DatasetConfig:
     batch_size: int
     num_workers: int
     pin_memory: bool
+    train_transforms: list[AugConfig] | None
+    valid_transforms: list[AugConfig] | None
 
 
 @dataclass

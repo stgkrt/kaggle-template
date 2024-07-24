@@ -20,5 +20,6 @@ seed: 42
 group: default
 # 間違って実験を上書きしたくないので実験名に日時を追加
 exp_name: default_${now:%Y%m%d_%H%M%S}
+img_size: 28
 tag: ["default"]
 ckpt_path: null

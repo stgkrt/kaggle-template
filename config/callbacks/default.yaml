@@ -9,13 +9,13 @@ model_checkpoint:
   dirpath: ${dir.output_dir}/ckpts
   filename: "epoch_{epoch:03d}"
   monitor: "val_loss"
-  mode: "max"
+  mode: "min"
   save_last: True
   auto_insert_metric_name: False
 
 early_stopping:
   monitor: "competition_metrics"
-  patience: 100
+  patience: 100 # early stoppingをしない場合は大きな値を設定
   mode: "max"
 
 model_summary:

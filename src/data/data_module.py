@@ -4,6 +4,8 @@ from torch.utils.data import ConcatDataset, DataLoader, Dataset, random_split
 from torchvision.datasets import MNIST
 from torchvision.transforms import transforms
 
+from src.data.augmentations import Augmentations
+
 
 class DataModule(LightningDataModule):
     """`LightningDataModule` for dataset.
@@ -15,13 +17,14 @@ class DataModule(LightningDataModule):
     def __init__(
         self,
         data_dir: str = "/kaggle/input",
-        img_size: int = 28,
         train_num: int = 55000,
         valid_num: int = 5000,
         test_num: int = 10000,
         batch_size: int = 64,
         num_workers: int = 0,
         pin_memory: bool = True,
+        train_transforms: Augmentations | None = None,
+        valid_transforms: Augmentations | None = None,
     ) -> None:
         """Initialize a `MNISTDataModule`.
 
@@ -40,15 +43,6 @@ class DataModule(LightningDataModule):
         # also ensures init params will be stored in ckpt
         self.save_hyperparameters(logger=False)
 
-        # data transformations
-        self.transforms = transforms.Compose(
-            [
-                transforms.ToTensor(),
-                transforms.Normalize((0.1307,), (0.3081,)),
-                transforms.Resize((img_size, img_size)),
-            ]
-        )
-
         self.data_train: Dataset | None = None
         self.data_val: Dataset | None = None
         self.data_test: Dataset | None = None
@@ -60,6 +54,28 @@ class DataModule(LightningDataModule):
         self.batch_size_per_device = batch_size
         self.num_workers = num_workers
         self.pin_memory = pin_memory
+
+        # data transformations
+        if train_transforms is None:
+            self.train_transforms = transforms.Compose(
+                [
+                    transforms.ToTensor(),
+                    transforms.Normalize((0.1307,), (0.3081,)),
+                    transforms.Resize((28, 28)),
+                ]
+            )
+        else:
+            self.train_transforms = train_transforms
+        if valid_transforms is None:
+            self.valid_transforms = transforms.Compose(
+                [
+                    transforms.ToTensor(),
+                    transforms.Normalize((0.1307,), (0.3081,)),
+                    transforms.Resize((28, 28)),
+                ]
+            )
+        else:
+            self.valid_transforms = valid_transforms
 
     def train_dataloader(self) -> DataLoader:
         """Create and return the train dataloader.
@@ -112,8 +128,8 @@ class DataModule(LightningDataModule):
 
         # load and split datasets only if not loaded already
         if not self.data_train and not self.data_val and not self.data_test:
-            trainset = MNIST(self.data_dir, train=True, transform=self.transforms)
-            testset = MNIST(self.data_dir, train=False, transform=self.transforms)
+            trainset = MNIST(self.data_dir, train=True, transform=self.train_transforms)
+            testset = MNIST(self.data_dir, train=False, transform=self.valid_transforms)
             dataset: Dataset = ConcatDataset(datasets=[trainset, testset])
             self.data_train, self.data_val, self.data_test = random_split(
                 dataset=dataset,
@@ -134,6 +150,8 @@ if __name__ == "__main__":
         num_workers=0,
         batch_size=64,
         pin_memory=False,
+        train_transforms=None,
+        valid_transforms=None,
     )
     data_module = DataModule(
         data_dir=config.data_dir,
@@ -143,14 +161,12 @@ if __name__ == "__main__":
         num_workers=config.num_workers,
         batch_size=config.batch_size,
         pin_memory=config.pin_memory,
+        train_transforms=None,
+        valid_transforms=None,
     )
     data_module.setup()
     train_loader = data_module.train_dataloader()
-    # val_loader = data_module.val_dataloader()
-    # test_loader = data_module.test_dataloader()
     print(train_loader.dataset)
-    # print(val_loader.dataset)
-    # print(test_loader.dataset)
     for input, target in train_loader:
         print(input.shape, target.shape)
         break
