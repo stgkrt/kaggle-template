@@ -1,5 +1,7 @@
+import os
 from typing import Any
 
+import polars as pl
 import pytorch_lightning as L
 import torch
 from torchmetrics import MeanMetric
@@ -18,11 +20,14 @@ class ModelModule(L.LightningModule):
         optimizer: torch.optim.Optimizer,
         scheduler: torch.optim.lr_scheduler,
         compile: bool,
+        oof_dir: str,
     ) -> None:
         super().__init__()
         self.model = model_architectures
         self.criterion = criterion
         self.metrics = metrics
+        self.best_metrics = -torch.inf
+        self.oof_dir = oof_dir
         # this line allows to access init params with 'self.hparams' attribute
         # also ensures init params will be stored in ckpt
         self.save_hyperparameters(logger=False)
@@ -36,6 +41,10 @@ class ModelModule(L.LightningModule):
             self.accelarator = "cpu"
         self.valid_preds = torch.Tensor().to(self.accelarator)
         self.valid_targets = torch.Tensor().to(self.accelarator)
+
+    def setup(self, stage: str) -> None:
+        if self.hparams.compile and stage == "fit":  # type: ignore
+            self.model = torch.compile(self.model)  # type: ignore
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.model(x)
@@ -92,10 +101,23 @@ class ModelModule(L.LightningModule):
         self.log(
             "competition_metrics", metrics, on_step=False, on_epoch=True, prog_bar=True
         )
-
+        self.save_best_oof(metrics)
+        # preds/targetsの初期化
         self.valid_preds = torch.Tensor().to(self.accelarator)
         self.valid_targets = torch.Tensor().to(self.accelarator)
         return super().on_train_epoch_end()
+
+    def save_best_oof(self, metrics: float) -> None:
+        if metrics > self.best_metrics:
+            self.best_metrics = metrics
+            # oofの保存
+            oof = pl.DataFrame(
+                {
+                    "target": self.valid_targets.cpu().numpy(),
+                    "preds": self.valid_preds.cpu().numpy(),
+                }
+            )
+            oof.write_csv(os.path.join(self.oof_dir, "oof.csv"))
 
     def configure_optimizers(self) -> dict[str, Any]:  # type: ignore
         """Choose what optimizers and learning-rate schedulers

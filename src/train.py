@@ -26,7 +26,7 @@ def main(config: DictConfig) -> None:
 
 @task_wrapper
 def run_train(config: DictConfig) -> tuple[dict[str, Any], dict[str, Any]]:
-    log.info(f"{__name__} started with config: \n{OmegaConf.to_yaml(config)}")
+    log.info(f"{__name__} started.")
     if config.get("seed"):
         log.info(f"Setting seed: {config.seed}")
         L.seed_everything(config.seed)

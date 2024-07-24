@@ -37,4 +37,6 @@ scheduler:
   verbose: false
 
 
-compile: true
+compile: false
+
+oof_dir: ${dir.output_dir}
