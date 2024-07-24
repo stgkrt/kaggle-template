@@ -6,7 +6,6 @@
 devcontainerでコンテナビルドが終わったときにscripts/setup_dev.shが実行されるようにしています。
 (precommitが入るようになっています)
 
-
 # directory
     ├── .devcontainer             <- Container settings.
     ├── configs                   <- Hydra configs
@@ -21,3 +20,14 @@ devcontainerでコンテナビルドが終わったときにscripts/setup_dev.sh
     ├── .pre-commit-config.yaml   <- pre-commit settings.
     ├── setup.cfg                 <- formatter/linter settings in vscode.
     └── README.md                 <- The top-level README for developers.
+
+# how to run exp
+multi fold exps scripts
+```bash
+sh scripts/exp.sh
+```
+
+single run python scripts
+```bash
+python src/train.py split=fold0
+```
