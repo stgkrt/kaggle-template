@@ -1,0 +1,28 @@
+# @package _global_
+# overriding hydra default config
+hydra:
+  job:
+    name: train
+  run:
+    dir: ${dir.output_dir}
+
+defaults:
+  - _self_
+  - trainer: basic_trainer
+  - model: basic_model
+  - dataset: basic_dataset
+  - splits: fold0
+  - dir: basic_dir
+  - callbacks: default
+  - logger: wandb
+  - extras: default
+
+competition_name: mnist
+seed: 42
+# 間違って実験を上書きしたくないので実験名に日時を追加
+exp_name: default
+suffix: ${now:%Y%m%d_%H%M%S}
+fold: ${splits.fold}
+img_size: 28
+tag: ["default"]
+ckpt_path: null

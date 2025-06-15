@@ -1,0 +1,4 @@
+data_dir: /kaggle/input/mnist
+processed_dir: /kaggle/input/processed_data
+output_dir: /kaggle/working/${exp_name}/${fold}
+wandb_dir: /kaggle/

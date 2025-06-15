@@ -1,0 +1,4 @@
+fold: fold1
+train_num: 30000
+valid_num: 30000
+test_num: 10000

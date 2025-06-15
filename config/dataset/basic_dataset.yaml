@@ -1,0 +1,32 @@
+_target_: src.data.data_module.DataModule
+data_dir: /kaggle/input
+batch_size: 32
+num_workers: 2
+pin_memory: true
+splits: ${splits}
+train_transforms:
+  _target_: src.data.augmentations.Augmentations
+  config:
+    aug_list:
+      - _target_: albumentations.HorizontalFlip
+        p: 0.5
+      - _target_: albumentations.VerticalFlip
+        p: 0.5
+      - _target_: albumentations.Resize
+        always_apply: True
+        height: ${img_size}
+        width: ${img_size}
+        p: 1.0
+      - _target_: albumentations.pytorch.ToTensorV2
+        always_apply: True
+valid_transforms:
+  _target_: src.data.augmentations.Augmentations
+  config:
+    aug_list:
+      - _target_: albumentations.Resize
+        always_apply: True
+        height: ${img_size}
+        width: ${img_size}
+        p: 1.0
+      - _target_: albumentations.pytorch.ToTensorV2
+        always_apply: True

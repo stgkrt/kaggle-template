@@ -1,21 +1,34 @@
 # my kaggle template
 ぼくの かんがえた さいきょうの かぐるかんきょう
 
+[lightning-hydra-template](https://github.com/ashleve/lightning-hydra-template/)ベースにテンプレートを作っています。
+
 devcontainerでコンテナビルドが終わったときにscripts/setup_dev.shが実行されるようにしています。
 (precommitが入るようになっています)
-sshから接続した状態でgit cloneから始めると、dotfilesがないとエラーが出ますがリビルドすれば正常に使用できます。
-pipのresolverでerrorが出ますがprecommitは動くのでとりあえずそのままで。
 
 # directory
-    ├── .devcontainer            <- Container settings.
-    ├── input/                   <- Competition Datasets.
-    ├── notebooks/               <- Jupyter notebooks.
-    ├── scripts/                 <- Scripts.
-    ├── src/                     <- Source code. This sould be Python module.
-    ├── working/                 <- Output models and train logs.
+    ├── .devcontainer             <- Container settings.
+    ├── configs/                  <- Hydra configs
+    ├── input/                    <- Competition Datasets.
+    ├── notebooks/                <- Jupyter notebooks.
+    ├── scripts/                  <- Scripts.
+    ├── src/                      <- Source code. This sould be Python module.
+    ├── working/                  <- Output models and train logs.
     │
     ├── .dockerignore
     ├── .gitignore
-    ├── .pre-commit-config.yaml  <- pre-commit settings.
-    ├── setup.cfg                <- formatter/linter settings in vscode.
-    └── README.md                <- The top-level README for developers.
+    ├── .pre-commit-config.yaml   <- pre-commit settings.
+    ├── pyproject.toml            <- project setting (only ruff setting).
+    ├── mypy.ini                  <- mypy setting.
+    └── README.md                 <- The top-level README for developers.
+
+# how to run exp
+multi fold exps scripts
+```bash
+sh scripts/exp.sh
+```
+
+single run python scripts
+```bash
+python src/train.py split=fold0
+```

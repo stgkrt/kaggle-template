@@ -25,13 +25,13 @@ transform = transforms.Compose([transforms.ToTensor()])
 # https://pytorch.org/vision/stable/generated/torchvision.datasets.MNIST.html#torchvision.datasets.MNIST
 # 学習用
 train_dataset = datasets.MNIST(
-    "./data",  # データの保存先
+    "/kaggle/input",  # データの保存先
     train=True,  # 学習用データを取得する
     download=True,  # データが無い時にダウンロードする
     transform=transform,  # テンソルへの変換など
 )
 # 評価用
-test_dataset = datasets.MNIST("./data", train=False, transform=transform)
+test_dataset = datasets.MNIST("/kaggle/input", train=False, transform=transform)
 
 # データローダー
 train_dataloader = torch.utils.data.DataLoader(
