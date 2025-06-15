@@ -23,14 +23,16 @@
             ],
             "settings": {
                 "editor.formatOnSave": true,
-                "notebook.formatOnSave.enabled":true,
+                "notebook.formatOnSave.enabled": true,
                 "[python]": {
                     "editor.formatOnSave": true,
                     "editor.codeActionsOnSave": {
-                        "source.organizeImports": true
+                        "source.organizeImports": "explicit"
                     }
                 },
-                "python.formatting.provider": "charliermarsh.ruff"
+                "python.formatting.provider": "charliermarsh.ruff",
+                "editor.defaultFormatter": "charliermarsh.ruff",
+                "notebook.defaultFormatter": "charliermarsh.ruff"
             }
         }
     },
